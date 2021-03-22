@@ -1,0 +1,68 @@
+$bgcolor:#06C1AE;
+$bgGray:#EFEFEF;
+$bgred:#FE2947;
+$orange:#FF3300;
+//加上彩色颜色
+@mixin color($w,$h,$g){
+    //定义循环变量
+    $i:0;
+    //枚举循环
+    @each $item in $w,$h,$g{
+        .color-#{$i}{
+            color:$item;
+        }
+        //修改循环变量
+        $i:$i+1;
+    }
+}
+
+@mixin grayAfter($h:10px){
+    &::after{
+        position:relative;
+        content:'';
+        width: 100%;
+        height:$h;
+        display:block;
+        background-color:$bgGray;
+        bottom:0;
+    }
+}
+
+@mixin grayBefore($h:10px){
+    &::before{
+        position:relative;
+        display:block;
+        content:'';
+        width: 100%;
+        height: $h;
+        background-color:$bgGray;
+        top:0;
+    }
+}
+
+//做三角形
+@mixin box($w:10px,$dir:top,$c:#000){
+    //行内块元素
+    width: 0;
+    height: 0;
+    border:$w solid transparent;
+    //设置特殊边
+    border-#{$dir}-color:$c;
+}
+
+//多行溢出隐藏
+@mixin hidden{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin clearfix{
+    &::after{
+        display:block;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        clear: both;
+    }
+}
